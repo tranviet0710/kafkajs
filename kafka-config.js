@@ -1,0 +1,44 @@
+class KafkaConfig {
+    constructor() {
+        this.kafka = new Kafka({
+            clientId: "nodejs-kafka",
+            brokers: ["localhost:9093"]
+        });
+        this.producer = this.kafka.producer();
+        this.consumer = this.kafka.consumer({ groupId: "dev-group" });
+    }
+
+    async produce(topic, messages) {
+        try {
+            await this.producer.connect();
+            await this.producer.send({
+                topic,
+                messages: messages.map((msg) => ({ value: msg }))
+            });
+        } catch (error) {
+            console.error("Error connecting to Kafka:", error);
+        } finally {
+            await this.producer.disconnect();
+        }
+    }
+
+    async consume(topic, callback) {
+        try {
+            await this.consumer.connect();
+            await this.consumer.subscribe({ topic, fromBeginning: true });
+
+            await this.consumer.run({
+                eachMessage: async ({ topic, partition, message }) => {
+                    const value = message.value.toString();
+                    callback(value);
+                }
+            });
+        } catch (error) {
+            console.error("Error connecting to Kafka:", error);
+        } finally {
+            await this.consumer.disconnect();
+        }
+    }
+}
+
+export default KafkaConfig;
