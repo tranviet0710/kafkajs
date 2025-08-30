@@ -71,3 +71,6 @@ curl -X POST http://localhost:3000/api/send \
 ## License
 
 ISC
+
+
+![alt text](crypto-extractor-flow.png)
