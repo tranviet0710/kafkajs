@@ -33,7 +33,6 @@ ws.on("open", () => {
 
 ws.on("message", (json) => {
   const { data, type } = JSON.parse(json);
-  console.log(data, type);
   switch (type) {
     case WebSocketEvents.BalanceUpdated: {
       balance = data.balance;

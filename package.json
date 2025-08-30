@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@binance/connector": "^3.6.1",
+  "ws": "^8.13.0",
     "@faker-js/faker": "^10.0.0",
     "body-parser": "^2.2.0",
     "express": "^5.1.0",

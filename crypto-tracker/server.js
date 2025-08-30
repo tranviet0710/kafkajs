@@ -136,7 +136,7 @@ async function main() {
     });
   });
 
-  console.log("Started successfully");
+  console.log("Started server successfully");
 }
 
 main();

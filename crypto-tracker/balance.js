@@ -33,10 +33,10 @@ async function main() {
 
   await taskConsumer.subscribe({
     topic: KafkaTopics.TaskToReadBalance,
-    fromBeginning: false,
+    fromBeginning: true,
   });
 
-  console.log("Started successfully");
+  console.log("Started balance successfully");
 
   await taskConsumer.run({
     eachMessage: async ({ message }) => {
